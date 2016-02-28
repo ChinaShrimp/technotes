@@ -121,3 +121,92 @@ meshblu-util register --server localhost:8080 -t device:meshblu-alljoyn > meshbl
 meshblu-util claim
 DEBUG='meshblu-alljoyn*' npm start
 ```
+
+# meshblu API
+## js
+
+## json
+
+
+## daoapp
+1. create user 
+chinashrimp:~/workspace $ curl -X POST -d "type=user&token=iot1234" http://chinashrimp-meshblu.daoapp.io/devices
+{"uuid":"37ae3a91-6487-4136-9573-53b85e8c88fa","online":false,"_id":"RQEqpwrZoP4TJGMv","type":"user","token":"iot1234","ipAddress":"104.155.204.22, 10.10.115.82, 10.10.70.43","meshblu":{"hash":"llkCi57Yo5CElDHMIfj6oHvEKqhuSQWDLWXzSxGXBS4="}}
+
+user uuid: 37ae3a91-6487-4136-9573-53b85e8c88fa
+user token: iot1234
+
+2. get user
+curl -X GET --user "37ae3a91-6487-4136-9573-53b85e8c88fa:iot1234" \
+http://chinashrimp-meshblu.daoapp.io/v2/devices/37ae3a91-6487-4136-9573-53b85e8c88fa
+
+3. create devices
+curl -X POST -d "owner=37ae3a91-6487-4136-9573-53b85e8c88fa" \
+http://chinashrimp-meshblu.daoapp.io/v2/devices
+
+{"uuid":"b7e8795e-5197-4e24-823b-e31ea0cab727","online":false,"_id":"nExzlqqpvOnLuzng","owner":"37ae3a91-6487-4136-9573-53b85e8c88fa","ipAddress":"104.155.204.22, 10.10.70.43, 10.10.70.43","token":"a9e66c6211e8ca754058f3c82a40d190f8ca0117","discoverWhitelist":["37ae3a91-6487-4136-9573-53b85e8c88fa"],"configureWhitelist":["37ae3a91-6487-4136-9573-53b85e8c88fa"],"meshblu":{"hash":"qDkvom5ehXAxSM3lWxYTn5P/ev+UK9jbqz0pEHeQEO8="}}
+
+4. get my device list
+
+curl -X GET --user "37ae3a91-6487-4136-9573-53b85e8c88fa:iot1234" \
+http://chinashrimp-meshblu.daoapp.io/v2/devices
+
+5. get my specified device
+curl -X GET --user "37ae3a91-6487-4136-9573-53b85e8c88fa:iot1234" \
+http://chinashrimp-meshblu.daoapp.io/v2/devices/b7e8795e-5197-4e24-823b-e31ea0cab727
+
+6. delete my specified device
+curl -X DELETE --user "37ae3a91-6487-4136-9573-53b85e8c88fa:iot1234" \
+http://chinashrimp-meshblu.daoapp.io/v2/devices/b7e8795e-5197-4e24-823b-e31ea0cab727
+
+# meshblu docker
+sudo wget -O /etc/sources.list http://mirrors.163.com/.help/sources.list.trusty
+sudo apt-get update
+sudo curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker vagrant
+
+sudo docker pull octoblu/meshblu
+
+## meshblu-util register
+meshblu-util register --server 172.17.0.2:80 > meshblu.json
+-> request
+POST /devices
+content-type: application/json
+
+<- reply
+uuid
+_id
+token
+meshblu
+ipAddress
+
+```
+{
+  "uuid": "c26fa3a5-46b4-428d-a667-1502bcc506bf",
+  "token": "62e7f647c52406da83d4d2b94f329e2cfe55acd4",
+  "server": "172.17.0.2",
+  "port": "80"
+}
+```
+
+## meshblu-util get
+meshblu-util get --server 172.17.0.2:80  meshblu.json
+{
+  "uuid": "c26fa3a5-46b4-428d-a667-1502bcc506bf",
+  "online": false,
+  "_id": "d4WUylOI8N3nZMuR",
+  "discoverWhitelist": [],
+  "configureWhitelist": [],
+  "receiveWhitelist": [],
+  "sendWhitelist": [],
+  "ipAddress": "172.17.0.1",
+  "meshblu": {
+    "hash": "89MOXPO4uM+y+13752Vm298iVGGROPNtAsrK8Nr/Psw="
+  }
+}
+
+-> request
+GET /v2/devices/c26fa3a5-46b4-428d-a667-1502bcc506bf
+
+
+[meshblu http doc]: https://meshblu-http.readme.io/
