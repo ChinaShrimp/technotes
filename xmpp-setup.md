@@ -20,7 +20,7 @@ docker run -d \
 ```
 
 ## [Profanity - XMPP Client](http://www.profanity.im/)
-For Ubuntu trusty, add following ppa to /etc/apt/sources.list
+For Ubuntu trusty, add following [ppa](https://launchpad.net/~rsrchboy/+archive/ubuntu/profanity) to /etc/apt/sources.list
 ```
 deb http://ppa.launchpad.net/rsrchboy/profanity/ubuntu trusty main 
 deb-src http://ppa.launchpad.net/rsrchboy/profanity/ubuntu trusty main 
