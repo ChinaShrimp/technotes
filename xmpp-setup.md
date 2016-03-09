@@ -4,7 +4,7 @@ Using docker to setup one XMPP server
 ```
 docker pull rroemhild/ejabberd
 
-# modify environment based on actual config, for details refer to [this](https://hub.docker.com/r/rroemhild/ejabberd/)
+# modify environment based on actual config, for details refer to [page](https://hub.docker.com/r/rroemhild/ejabberd/)
 docker run -d \
     --name "ejabberd" \
     -p 5222:5222 \
@@ -27,5 +27,5 @@ deb-src http://ppa.launchpad.net/rsrchboy/profanity/ubuntu trusty main
 ```
 Then install profanity
 ```
-sudo apt-get install -y profanity
+sudo apt-get install -y --force-yes profanity
 ```
