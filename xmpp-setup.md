@@ -29,3 +29,40 @@ Then install profanity
 ```
 sudo apt-get install -y --force-yes profanity
 ```
+## Profanity usage
+1. Start Profanity
+```
+profanity
+```
+
+2. Window
+The first window (1) is always used as the console window where system messages and command responses are shown.
+Use "Alt+[number]" to switch among different windows, for example Alt+0. Or use Alt+<-/Alt+-> to switch beteen prev and next.
+
+3. Connect
+```
+/connect [account] server [hostname] port [port number]
+# for example
+/connect admin@example.de server xmpp.example.de
+```
+
+4. Message
+```
+/msg [receiver] [message]
+# for example
+/msg bot@example.de hello
+```
+
+5. Presence
+```
+/away
+/dnd
+/xa
+/online
+/chat
+```
+
+6. Quit
+```
+/quit
+```
