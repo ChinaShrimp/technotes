@@ -82,3 +82,4 @@ fi
 
 # Reference
 [Creating a Happy Git Environment on OS](https://gist.github.com/trey/2722934)
+[OSX git PS1 command not Found](http://stackoverflow.com/questions/12870928/mac-bash-git-ps1-command-not-found)
