@@ -31,3 +31,23 @@ sudo docker run \
 ```
 
 # Pushing Images
+Firstly, you should get the docker image either building it or pulling from
+docker hub. Then modify your docker option file to add insecure option.
+```
+# Ubuntu 14.04, /etc/default/docker, add following line
+DOCKER_OPTS="--insecure-registry <REGISTRY HOST IP/NAME>:5000"
+sudo service docker restart
+```
+Then you could tag your image and push it
+```
+docker tag <image id> <REGISTRY HOST IP/NAME>:5000/<docker name>
+
+# for example
+$ docker images
+REPOSITORY                                       TAG                 IMAGE ID            CREATED             SIZE
+registry                                         2.3                 83139345d017        2 days ago          165.8 MB
+
+$ docker tag 83139345d017 192.168.1.100:5000/registry:2.3
+$ docker push 192.168.1.100:5000/registry:2.3
+```
+That's it!
