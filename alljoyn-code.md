@@ -9,6 +9,11 @@ Change to your working directory and execute:
 ```
 repo init -u https://git.allseenalliance.org/gerrit/devtools/manifest -b RB15.04
 repo sync
+
+mkdir gateway
+cd gateway
+git clone https://git.allseenalliance.org/gerrit/gateway/gwagent
+git clone https://git.allseenalliance.org/gerrit/xmppconn
 ```
 
 # Reference
