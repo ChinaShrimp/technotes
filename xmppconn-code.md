@@ -1,10 +1,10 @@
 # Receive message from transport
+```
 XmppTransport::XmppStanzaHandler
   Transport::MessageReceived
     XMPPConnector::MessageReceived
       根据typeCode进行分别处理
   
-```
 # All typeCode defined in XMPPConnector.h
     static const std::string ALLJOYN_CODE_ADVERTISEMENT;
     static const std::string ALLJOYN_CODE_ADVERT_LOST;
@@ -23,9 +23,8 @@ XmppTransport::XmppStanzaHandler
     static const std::string ALLJOYN_CODE_GET_ALL;
     static const std::string ALLJOYN_CODE_GET_ALL_REPLY;
     static const std::string ALLJOYN_CODE_NAME_OWNER_CHANGED;
-```
 
-根据typeCode分别调用
+#根据typeCode分别调用
 ReceiveAdvertisement
 ReceiveAdvertisementLost
 ReceiveAnnounce
@@ -39,9 +38,11 @@ ReceiveSignal
 ReceiveGetReply
 ReceiveSetReply
 ReceiveGetAllReply
+```
 
 
-# Send Message
+# Send Message through Transport
+```
 SendAdvertisement
 SendAdvertisementLost
 SendAnnounce
@@ -64,13 +65,11 @@ SendNameOwnerChanged
 XMPPConnector::SendMessage
   Transport::Send
     XmppTransport::SendImpl
-
-# GetRemoteAttachment scenario
-XMPPConnector::GetRemoteAttachment
-  new RemoteBusAttachment
+```
 
 # Announce
 ## Receive remote online presence
+```
 When receiving remote online presence message, xmppconn will attach to
 local AllJoyn Bus and listens to Announcement on local network
 XmppTransport::XmppPresenceHandler
@@ -83,11 +82,12 @@ XmppTransport::XmppPresenceHandler
                 new InternalAnnounceHandler(bus)
                 // Add the user handler to the internal AnnounceHandler
                 internalAnnounceHandler->AddHandler
-
+```
 ## Announce
 When receiving announcement from local network, registered callback will
 be called. Then xmppconn will introspect the device bus objects
 
+```
 AllJoynListener::Announce
   // 通过标准AllJoyn Inspect接口获取发送Abount消息设备的信息
   JoinSession
@@ -101,21 +101,14 @@ AllJoynListener::IntrospectCallback
 
 AllJoynListener::GetBusObjectsAnnouncementCallback
   XMPPConnector::SendAnnounce
+```
 
 ## Receiving remote Announce
+```
 typeCode == ALLJOYN_CODE_ANNOUNCE
 XMPPConnector::ReceiveAnnounce
     GetRemoteAttachment
     bus->RelayAnnouncement
         new AboutObj
         m_aboutObj->Announce
-
-# SendAdvertisement
-FoundAdvertisedName
-Announce
-
-IntrospectCallback
-
-
-AllJoynListener::GetBusObjectsCallback
-  XMPPConnector::SendAdvertisement
+```
