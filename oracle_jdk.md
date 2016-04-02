@@ -16,4 +16,5 @@ sudo apt-get install -y oracle-java8-installer
 
 # Reference
 [Installing Java Automatically (With Silent Option)](http://askubuntu.com/questions/190582/installing-java-automatically-with-silent-option)
+
 [Install Oracle Java 8 In Ubuntu Or Linux Mint Via PPA Repository](http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html)
